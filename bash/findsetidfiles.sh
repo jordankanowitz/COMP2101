@@ -23,5 +23,5 @@ echo "============"
 find / -type f -executable -perm -4000 -ls 2>/dev/null | sort -k 3
 echo "Ordering the 10 largest files"
 echo "============"
-find / -type f -executable -ls 2>/dev/null | sort -r -n -k7 | head -10
+find / -type f -ls 2>/dev/null | sort -r -n -k7 | head -10
 echo ""
