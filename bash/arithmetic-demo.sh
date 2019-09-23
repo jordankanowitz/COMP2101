@@ -20,3 +20,20 @@ $firstnum plus $secondnum is $sum
 $firstnum divided by $secondnum is $dividend
   - More precisely, it is $fpdividend
 EOF
+
+
+#ask the user for the two numbers
+echo "Please enter your first number: "
+read a
+echo "Please enter a second number: "
+read b
+
+ #demonstrate substraction and multiplication
+echo $a subtracted by $b is $((a - b))
+echo $a multiplied by $b is $((a * b))
+
+#display first divided by second gives x with a remainder of y
+echo $a divided by $b is $((a / b)) with a remainder of $((a % b))
+
+#the first number raised to the power of the second number
+echo $a to the power of $b is $((a ^ b)) 
