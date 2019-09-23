@@ -15,3 +15,21 @@ echo "
 Rolling...
 $(( RANDOM % 6 + 1)), $(( RANDOM % 6 + 1 )) rolled
 "
+
+#edit the script so it tells the user they are rolling a 6 sided die
+echo "
+Rolling two 6 sided dice...
+$(( RANDOM % 6 + 1)), $(( RANDOM % 6 + 1 )) rolled
+"
+
+#roll of 5 six sided dice
+echo "
+Rolling 5 six-sided dice....
+$(( RANDOM % 6 + 1 )), $(( RANDOM % 6 + 1)), $(( RANDOM % 6 + 1 )), $(( RANDOM % 6 + 1)), $(( RANDOM % 6 + 1 )) rolled
+"
+
+#roll one 20 sided dice
+echo "
+Rolling one 20 sided dice..
+You rolled $(( RANDOM % 20 + 1))
+"
