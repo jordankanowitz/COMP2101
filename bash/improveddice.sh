@@ -18,6 +18,10 @@ echo "Rolling..."
 die1=$(( RANDOM % 6 + 1))
 die2=$(( RANDOM % 6 + 1 ))
 # sum up the rolls
-sum=$(( die1 + die2 ))
+sum=$(( $die1 + $die2 ))
 # display the results
 echo "Rolled $die1, $die2 for a $sum"
+
+#generate the average of the dice
+avg=$(echo $sum / 2 | bc -l )
+echo "The average of these numbers is: " $avg
