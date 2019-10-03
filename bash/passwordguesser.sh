@@ -8,5 +8,22 @@
 
 myString="TestString"
 referenceString="password"
+k=3
+#[ $myString = $referenceString ] && echo "You guessed the password!" || echo "The password eludes you..."
 
-[ $myString = $referenceString ] && echo "You guessed the password!" || echo "The password eludes you..."
+#task 1
+#read -p "What is the password?" passwordGuess
+#echo $passwordGuess
+
+#task 2
+while [ $k -ne 0 ]
+do
+read -p "What is the password?" passwordGuess
+if [ "$passwordGuess" == "$referenceString" ]; then
+ echo "Your guess is correct"
+break
+else
+  echo "Your guess is not correct"
+  k=$(( $k - 1 ))
+fi
+done
