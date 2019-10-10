@@ -35,7 +35,9 @@
 
 firstHostname=$(hostname)
 lanAddress=$(ip a s $(ip a |awk '/: e/{gsub(/:/,"");print $2}')|awk '/inet /{gsub(/\/.*/,"");print $2}')
-lanHostname=$(getent hosts $(ip a s $(ip a |awk '/0: e/{gsub(/:/,"");print $2}'))|awk '/inet /{gsub(/\/.*/,"");print $2}' | awk '{print $2}')
+lanHostname=$(getent hosts 207.189.109.0 )
+routerNumber=$(netstat -nr | awk '$1 == "0.0.0.0"{print$2}')
+routerName=$(ip a |awk '/: e/{gsub(/:/,"");print $2}')
 externalIP=$(curl -s icanhazip.com)
 externalName=$(getent hosts $(curl -s icanhazip.com) | awk '{print $2}')
 
@@ -44,6 +46,8 @@ cat <<EOF
 Hostname        : $firstHostname
 LAN Address     : $lanAddress
 LAN Hostname    : $lanHostname
+Router Number   : $routerNumber
+Router Name     : $routerName
 External IP     : $externalIP
 External Name   : $externalName
 EOF
