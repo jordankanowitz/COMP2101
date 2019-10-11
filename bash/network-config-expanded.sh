@@ -61,8 +61,6 @@ EOF
 # Per-interface report
 #####
 # define the interface being summarized
-FirstInterface="ens33"
-SecondInterface="lo"
 
 for interface in $(ls /sys/class/net )
 
