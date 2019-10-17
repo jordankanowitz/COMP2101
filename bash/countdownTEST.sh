@@ -8,13 +8,20 @@
 #       to getting out of the script and exit immediately.
 
 # Task: Explain in a comment how the line with the word moose in it works.
-trap reset 2
-trap foundSecret 3
-
-function foundSecret {
-  echo "You found the secret for getting out of the script"
-  exit
+function cleanquit {
+  logger -t `basename "$0"` -i -p user.info -s "You found the secret to exiting the script"
+  exit 1
 }
+trap cleanquit SIGQUIT
+
+function cleanint {
+  logger -t `basename "$0"` -i -p user.info -s "You are too early, try again"
+  countdown
+  trap - signals
+}
+trap cleanint SIGINT
+
+
 
 #### Variables
 programName="$(basename $0)" # used by error_functions.sh
@@ -49,6 +56,18 @@ EOF
 #### Main Program
 
 # Process command line parameters
+function countdown {
+  function cleanquit {
+    logger -t `basename "$0"` -i -p user.info -s "You found the secret to exiting the script"
+    exit 1
+  }
+  trap cleanquit SIGQUIT
+  function cleanint {
+    logger -t `basename "$0"` -i -p user.info -s "You are too early, try again"
+    countdown
+    trap - signals
+  }
+  trap cleanint SIGINT
 while [ $# -gt 0 ]; do
     case $1 in
         -w | --waittime )
@@ -80,14 +99,12 @@ fi
 
 sleepCount=$numberOfSleeps
 
-function reset {
-  echo "You are not allowed to interrupt the count"
-  sleepCount=$(($NumberOfSleeps+11))
-}
-
 while [ $sleepCount -gt 0 ]; do
     echo "Waiting $sleepCount more times for signals"
     sleep $sleepTime
     sleepCount=$((sleepCount - 1))
 done
 echo "Wait counter expired, exiting peacefully"
+}
+
+countdown
